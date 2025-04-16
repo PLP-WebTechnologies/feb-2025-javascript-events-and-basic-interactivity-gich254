@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureLocal - Affordable Cybersecurity Solutions</title>
+  <style>
+    /* Basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(172, 200, 211);
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #00264d;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    main {
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    h1, h2 {
+      color: #00264d;
+    }
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #00264d;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004080;
+    }
+    .hidden {
+      display: none;
+    }
+    .error {
+      border-color: red;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SecureLocal</h1>
+    <nav>
+      <a href="#about">About Us</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <!-- About section including vision, mission, and values -->
+    <section id="about">
+      <h2>About SecureLocal</h2>
+      <p>
+        SecureLocal is dedicated to empowering small businesses with affordable and tailored cybersecurity solutions. We combine technical expertise in electrical and electronics with robust cybersecurity skills to protect your business.
+      </p>
+      <h3>Vision</h3>
+      <p>
+        To empower small businesses with the knowledge and tools to protect themselves from cyber threats, fostering a secure and prosperous community.
+      </p>
+      <h3>Mission</h3>
+      <p>
+        Our mission is to provide accessible and effective cybersecurity solutions and education to small businesses, helping them safeguard their digital assets and maintain customer trust.
+      </p>
+      <h3>Corporate Values</h3>
+      <ul>
+        <li><strong>Integrity:</strong> Honest and transparent communication.</li>
+        <li><strong>Education:</strong> Empowering clients with practical knowledge.</li>
+        <li><strong>Accessibility:</strong> Making cybersecurity affordable and understandable.</li>
+        <li><strong>Community:</strong> Supporting and strengthening our local business community.</li>
+        <li><strong>Innovation:</strong> Continuously adapting to counter evolving cyber threats.</li>
+      </ul>
+      <!-- Button demonstrating event listener for interactive element -->
+      <button id="toggleInfo">More About Our Services</button>
+      <div id="moreInfo" class="hidden">
+        <h3>Our Services Include:</h3>
+        <ul>
+          <li>Cybersecurity Training: Simple, practical sessions to recognize and avoid threats like phishing.</li>
+          <li>Security Audits: Cost-effective assessments to identify weaknesses in your systems.</li>
+          <li>Tailored Recommendations: Suggestions for affordable tools and practices to strengthen your defenses.</li>
+          <li>Ongoing Support: Subscription-based assistance with continuous updates as threats evolve.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact form with form validation -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Interested in our services? Get in touch today!</p>
+      <form id="contactForm" novalidate>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Your Name">
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="Your Email">
+        
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required placeholder="Your Phone Number">
+        
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required placeholder="How can we help you?"></textarea>
+        
+        <button type="submit">Submit</button>
+      </form>
+      <div id="formMessage"></div>
+    </section>
+  </main>
+  <footer style="background-color: #00264d; color:#fff; text-align: center; padding:10px;">
+    <p>
+      Contact: 0729824459 | Email: petergitau@gmail.com | Location: Maai-Mahiu, Naivasha Kenya
+    </p>
+  </footer>
+
+  <!-- JavaScript for interactive behavior and form validation -->
+  <script>
+    // Toggle interactive "More About Our Services" section when button is clicked
+    const toggleBtn = document.getElementById('toggleInfo');
+    const moreInfoDiv = document.getElementById('moreInfo');
+    
+    toggleBtn.addEventListener('click', function() {
+      if (moreInfoDiv.classList.contains('hidden')) {
+        moreInfoDiv.classList.remove('hidden');
+        toggleBtn.textContent = 'Hide Details';
+      } else {
+        moreInfoDiv.classList.add('hidden');
+        toggleBtn.textContent = 'More About Our Services';
+      }
+    });
+    
+    // Form validation and simulated submission using event listener
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+    
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Stop the form from submitting immediately
+      formMessage.textContent = '';
+      
+      // Retrieve form fields
+      let isValid = true;
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+      const messageInput = document.getElementById('message');
+      
+      // Remove error indicators from previous validations
+      [nameInput, emailInput, phoneInput, messageInput].forEach(function(input) {
+        input.classList.remove('error');
+      });
+      
+      // Validate each field
+      if (nameInput.value.trim() === '') {
+        isValid = false;
+        nameInput.classList.add('error');
+      }
+      
+      if (emailInput.value.trim() === '' || !validateEmail(emailInput.value)) {
+        isValid = false;
+        emailInput.classList.add('error');
+      }
+      
+      if (phoneInput.value.trim() === '') {
+        isValid = false;
+        phoneInput.classList.add('error');
+      }
+      
+      if (messageInput.value.trim() === '') {
+        isValid = false;
+        messageInput.classList.add('error');
+      }
+      
+      if (!isValid) {
+        formMessage.style.color = 'red';
+        formMessage.textContent = 'Please fill in all required fields correctly.';
+        return; // Do not proceed if form is invalid
+      }
+      
+      // Simulated form submission (in a real-world application, you would send the data to a server)
+      formMessage.style.color = 'green';
+      formMessage.textContent = 'Thank you for contacting SecureLocal! We will get back to you shortly.';
+      
+      // Reset the form for demonstration purposes
+      form.reset();
+    });
+    
+    // A simple regular expression to validate email addresses
+    function validateEmail(email) {
+      const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+      return regex.test(email);
+    }
+  </script>
+</body>
+</html>
+v
